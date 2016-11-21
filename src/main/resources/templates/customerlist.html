@@ -4,17 +4,57 @@
 	layout:decorator="layout">
 <head>
 <title>Customer : View all</title>
+<style>
+	body {
+	    font-family: 'Segoe UI', Arial;
+	    font-size: 16px;
+		padding: 0px 20px;	
+	}
+    input[type="submit"] {
+        background-color: #0065a0;
+        border: none;
+        color: #ffffff;
+	    font-family: 'Segoe UI', Arial;
+	    font-size: 16px;
+        padding: 5px 10px;
+        text-decoration: none;
+        text-transform: capitalize;
+	}
+    input[type="submit"] {
+        background-color: #155F88;
+        box-shadow: none;
+        color: #fff;
+        outline: 0;             
+        text-decoration: none;
+    }
+    h1 {
+    	font-size: 22px;
+    }
+    table, th, td {
+    	border: 1px solid #cdcdcd;
+    	border-collapse: collapse;
+    }
+    th {
+    	font-weight: bold;
+    }
+    th, td {
+    	padding: 5px 20px;
+    }
+    .row {
+    	margin-top: 20px;
+    }
+</style>
 </head>
 <body>
-	<h1 layout:fragment="header">Customer : View all</h1>
+	<h1 layout:fragment="header">All Customers</h1>
 	<div layout:fragment="content" class="container">
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<td>id</td>
-					<td>Name</td>
-					<td>Firstname</td>
-					<td></td>
+					<th>Id</th>
+					<th>Last name</th>
+					<th>First name</th>
+					<th></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -22,14 +62,14 @@
 					<td colspan="4">No customers</td>
 				</tr>
 				<tr th:each="customer : ${customers}">
-					<td><a href="1.html" th:href="${customer.id+'.html'}"
-						th:text="${customer.id}">1</a></td>
+					<td><a href="1.html" th:href="${customer.id+'.html'}" th:text="${customer.id}">1</a></td>
 					<td th:text="${customer.name}">Name</td>
 					<td th:text="${customer.firstname}">Firstname</td>
-					<td><form th:action="${customer.id}+'.html'"
-							th:method="delete">
+					<td>
+						<form th:action="${customer.id}+'.html'" th:method="delete">
 							<input type="submit" value="delete" class="btn btn-link" />
-						</form></td>
+						</form>
+					</td>
 				</tr>
 			</tbody>
 		</table>
