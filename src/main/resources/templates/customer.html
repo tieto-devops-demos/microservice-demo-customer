@@ -7,8 +7,9 @@
 	</head>
 	<body>
 		<h1 layout:fragment="header">
-			<span class="icon customer-icon"></span>
+			<span class="icon add-customer-icon" th:if="${customer.id == 0}"></span>
 			<span class="iconed-title" th:if="${customer.id == 0}">Add Customer</span>
+			<span class="icon edit-customer-icon" th:if="${customer.id != 0}"></span>
 			<span class="iconed-title" th:if="${customer.id != 0}">Edit Customer</span>
 		</h1>
 		<div layout:fragment="content" class="container">
