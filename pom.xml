@@ -3,16 +3,33 @@
 	<modelVersion>4.0.0</modelVersion>
 	<name>Customer</name>
 	<parent>
-		<groupId>com.ewolff</groupId>
-		<artifactId>microservice-demo</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.3.5.RELEASE</version>
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
-	<properties>
-	 <service_url>http://localhost:9001</service_url>
-	</properties>
 
+	<groupId>com.ewolff</groupId>
+	<version>0.0.1-SNAPSHOT</version>
 	<artifactId>microservice-demo-customer</artifactId>
 
+	<properties>
+	 <service_url>http://localhost:9001</service_url>
+	 <java.version>1.8</java.version>
+	 <spring-cloud.version>Brixton.RELEASE</spring-cloud.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Brixton.RELEASE</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 
@@ -94,6 +111,10 @@
           <target>1.8</target>
         </configuration>
       </plugin>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
     </plugins>
 
   </build>
@@ -110,7 +131,7 @@
 			          <skipTests>true</skipTests>
 			        </configuration>
 			      </plugin>
-	        
+
 		        <plugin>
 		          <groupId>org.robotframework</groupId>
 		          <artifactId>robotframework-maven-plugin</artifactId>
