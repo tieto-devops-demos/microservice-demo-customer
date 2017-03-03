@@ -4,7 +4,7 @@ general:
 #  dependency:
 #   - Pipeline X [Stage X]
 #   - Pipeline Y [Stage Y]
-  
+
 #pre_stage:
 #  go_cd_agent_props:
 #    - java:8
@@ -12,7 +12,7 @@ general:
 #  custom_cmd:
 #    - true
 #    - true
-  
+
 compile:
   go_cd_agent_props:
     - java:8
@@ -43,8 +43,6 @@ integration_testing:
       - java:8
       - maven
     test_services:
-      owasp_zap: false
-      selenium_grid: false
       service_virtualization: false
       robot_framework: true
       cucumber: false
@@ -52,11 +50,12 @@ integration_testing:
       - stage: IntegrationTesting
         jobs:
           - job: Robot
+            selenium_grid: false
             tasks:
               - task: mvn -P Robot -D service_url=http://customer:8080 install
                 build_path: .
                 run_if_conditions: passed
-  
+
 post_stage:
   go_cd_agent_props:
     - java:8
