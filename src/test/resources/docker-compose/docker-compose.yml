@@ -3,8 +3,9 @@ services:
   eureka:
     image: eekamak/eureka:latest
   customer:
-    image: customer:$GO_PIPELINE_COUNTER
-    links:
+#    image: customer:$GO_PIPELINE_COUNTER
+    image: customer:latest  #REMOVE
+  links:
      - eureka
     expose:
      - "8080"
