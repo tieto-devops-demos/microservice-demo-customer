@@ -5,7 +5,7 @@ services:
   customer:
 #    image: customer:$GO_PIPELINE_COUNTER
     image: "customer:latest"
-  links:
-     - eureka
-  expose:
-     - "8080"
+    links:
+      - eureka
+    expose:
+      - "8080"
