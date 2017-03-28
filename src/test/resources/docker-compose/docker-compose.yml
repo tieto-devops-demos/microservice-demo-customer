@@ -7,5 +7,5 @@ services:
     image: "customer:latest"
   links:
      - eureka
-    expose:
+  expose:
      - "8080"
