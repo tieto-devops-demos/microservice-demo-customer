@@ -1,10 +1,9 @@
 version: '2'
 services:
   eureka:
-    image: eekamak/eureka:latest
+    image: andon/eureka:latest
   customer:
-#    image: customer:$GO_PIPELINE_COUNTER
-    image: "customer:latest"
+    image: customer:$GO_PIPELINE_COUNTER
     links:
       - eureka
     expose:

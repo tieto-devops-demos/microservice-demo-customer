@@ -61,6 +61,9 @@ post_stage:
     - java:8
     - maven
   custom_cmd:
-#      - sudo docker login -u eekamak -p $passu
-#      - sudo docker tag customer:$GO_PIPELINE_COUNTER customer:latest
-      - true
+      - sudo docker login -u makelkal -p $passu
+      - sudo docker tag customer:$GO_PIPELINE_COUNTER andon/customer:$GO_PIPELINE_COUNTER
+      - sudo docker push andon/customer:$GO_PIPELINE_COUNTER
+      - sudo docker tag customer:$GO_PIPELINE_COUNTER andon/customer:latest
+      - sudo docker push andon/customer:latest
+      
