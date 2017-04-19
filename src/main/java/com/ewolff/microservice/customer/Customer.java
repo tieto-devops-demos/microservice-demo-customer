@@ -1,36 +1,23 @@
 package com.ewolff.microservice.customer;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
-import org.hibernate.validator.constraints.Email;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document(collection = "customer")
 public class Customer {
 
-	@Id
-	@GeneratedValue
 	private Long id;
 
-	@Column(nullable = false)
 	private String name;
 
-	@Column(nullable = false)
 	private String firstname;
 
-	@Column(nullable = false)
-	@Email
 	private String email;
 
-	@Column(nullable = false)
 	private String street;
 
-	@Column(nullable = false)
 	private String city;
 
 	public Customer() {
@@ -38,7 +25,7 @@ public class Customer {
 		id = 0l;
 	}
 
-	public Customer(String firstname, String name, String email, String street,
+	public Customer(Long id,  String firstname, String name, String email, String street,
 			String city) {
 		super();
 		this.name = name;
@@ -46,6 +33,7 @@ public class Customer {
 		this.email = email;
 		this.street = street;
 		this.city = city;
+		this.id = id;
 	}
 
 	public String getEmail() {

@@ -95,7 +95,7 @@ public class CustomerWebIntegrationTest {
 		assertTrue(resultEntity.getStatusCode().is2xxSuccessful());
 		String customerList = resultEntity.getBody();
 		assertFalse(customerList.contains("Hoeller1"));
-		customerRepository.save(new Customer("Juergen", "Hoeller1",
+		customerRepository.save(new Customer(1L, "Juergen", "Hoeller1",
 				"springjuergen@twitter.com", "Schlossallee", "Linz"));
 
 		customerList = restTemplate.getForObject(customerURL() + "/list.html",
