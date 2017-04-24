@@ -10,5 +10,6 @@ services:
       - "8080"
   demodb:
     image: mongo:3.5.5
-    expose: 27017
+    expose: 
+      - 27017
       
