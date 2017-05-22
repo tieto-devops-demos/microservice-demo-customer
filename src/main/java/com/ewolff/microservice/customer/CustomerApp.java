@@ -18,15 +18,18 @@ public class CustomerApp {
 	private final CustomerRepository customerRepository;
 
 	@Autowired
+	private NextSequenceService nextSeqService;
+	
+	@Autowired
 	public CustomerApp(CustomerRepository customerRepository) {
 		this.customerRepository = customerRepository;
 	}
 
 	@PostConstruct
 	public void generateTestData() {
-		customerRepository.save(new Customer("Eberhard", "Wolff",
+		customerRepository.save(new Customer(nextSeqService.getNextSequence(), "Eberhard", "Wolff",
 				"eberhard.wolff@gmail.com", "Unter den Linden", "Berlin"));
-		customerRepository.save(new Customer("Rod", "Johnson",
+		customerRepository.save(new Customer(nextSeqService.getNextSequence(),"Rod", "Johnson",
 				"rod@somewhere.com", "Market Street", "San Francisco"));
 	}
 

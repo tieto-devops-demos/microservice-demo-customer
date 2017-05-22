@@ -12,11 +12,15 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.ewolff.microservice.customer.Customer;
 import com.ewolff.microservice.customer.CustomerRepository;
+import com.ewolff.microservice.customer.NextSequenceService;
 
 @Controller
 public class CustomerController {
 
 	private CustomerRepository customerRepository;
+	
+	@Autowired
+	private NextSequenceService nextSequenceService; 
 
 	@Autowired
 	public CustomerController(CustomerRepository customerRepository) {
@@ -42,6 +46,7 @@ public class CustomerController {
 
 	@RequestMapping(value = "/form.html", method = RequestMethod.POST)
 	public ModelAndView post(Customer customer, HttpServletRequest httpRequest) {
+		customer.setId(nextSequenceService.getNextSequence());
 		customer = customerRepository.save(customer);
 		return new ModelAndView("success");
 	}
