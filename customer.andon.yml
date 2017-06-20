@@ -1,0 +1,72 @@
+# customer.andon.yml
+pipelines:
+  Customer:
+    environment_variables:
+      SONARUSER: admin
+      SONARPASSWORD: admin
+    group: eCommerce
+    materials:
+      customer:  # this is the name of material
+        # says about type of material and url at once
+        git: https://github.com/tieto-devops-demos/microservice-demo-customer.git
+    stages:
+      - build: # name of stage
+          jobs:
+            maven: # name of the job
+            andon: # andon job configuration
+              image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:17.04" # elastic agent image
+              sonarqube: true
+            tasks:
+             - exec: # indicates type of task
+               command: bash
+               arguments:
+                - "-c" 
+                - "mvn clean -Djava.security.egd=file:/dev/./urandom install"
+             - exec: # indicates type of task
+               command: bash
+               arguments:
+                - "-c" 
+                - "mvn sonar:sonar -Dsonar.login=$SONARUSER -Dsonar.password=$SONARPASSWORD -Dsonar.host.url=http://sonarqube:9000"
+            docker: # name of the job
+              andon: # andon job configuration
+                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:17.04" # elastic agent image
+                sonarqube: true
+              tasks:
+               - exec: # indicates type of task
+                 run-if: passed
+                 command: bash
+                 arguments:
+                  - "-c" 
+                  - "docker build -f Dockerfile -t customer:$GO_PIPELINE_COUNTER ."
+      - test: # name of stage
+        jobs:
+          integration_tests: # name of the job
+            andon: # andon job configuration
+              image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:17.04" # elastic agent image
+            deploy_env:
+              docker_compose:
+                - "/godata/pipelines/Customer/src/test/resources/docker-compose/docker-compose.yml"
+            artifacts:
+              - test:
+                source: target/*
+            tabs:
+              robot_report: robotframework-reports/report.html
+            tasks:
+             - exec: # indicates type of task
+               run_if: passed
+               working_directory: .
+               command: bash
+               arguments:
+                - "-c" 
+                - "mvn -P Robot -D service_url=http://customer:8080 install"
+      - post: # name of stage
+        jobs:
+          docker: # name of the job
+            andon: # andon job configuration
+              image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:17.04" # elastic agent image
+            tasks:
+             - exec: # indicates type of task
+               command: bash
+               arguments:
+                 - "-c" 
+                 - "sudo docker tag catalog:$GO_PIPELINE_COUNTER customer:latest"
