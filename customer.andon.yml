@@ -49,7 +49,7 @@ pipelines:
                 sonarqube: true
                 deploy_env:
                   docker_compose:
-                    - "/godata/pipelines/Customer/src/test/resources/docker-compose/docker-compose.yml"
+                    - "src/test/resources/docker-compose/docker-compose.yml"
               artifacts:
                 - test:
                     source: "target/*"
