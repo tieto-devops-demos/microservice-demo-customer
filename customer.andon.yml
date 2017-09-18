@@ -15,7 +15,7 @@ pipelines:
           jobs:
             maven: # name of the job
               andon: # andon job configuration
-                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:17.09" # elastic agent image
+                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
                 sonarqube: true
               tasks:
                - exec: # indicates type of task
@@ -30,7 +30,7 @@ pipelines:
                     - "docker build -f Dockerfile -t customer:$GO_PIPELINE_COUNTER ."
             sonar: # name of the job
               andon: # andon job configuration
-                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:17.09" # elastic agent image
+                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
                 sonarqube: true
               tasks:
                - exec: # indicates type of task
@@ -43,7 +43,7 @@ pipelines:
           jobs:
             integration_tests: # name of the job
               andon: # andon job configuration
-                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:17.09" # elastic agent image
+                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
                 sonarqube: true
                 deploy_env:
                   docker_compose:
@@ -64,7 +64,7 @@ pipelines:
           jobs:
             docker: # name of the job
               andon: # andon job configuration
-                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:17.09" # elastic agent image
+                image: "andon.artifactorypro.shared.pub.tds.tieto.com/andon-gocd-agent-java8-maven3:v17.10.0" # elastic agent image
                 sonarqube: true
               tasks:
                - exec: # indicates type of task
