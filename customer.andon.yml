@@ -34,7 +34,7 @@ pipelines:
                    arguments:
                     - "-c" 
                     - "docker build -f Dockerfile -t customer:$GO_PIPELINE_COUNTER ."
-      - test2: # name of stage
+      - test: # name of stage
           jobs:
             integration_tests: # name of the job
               andon: # andon job configuration
